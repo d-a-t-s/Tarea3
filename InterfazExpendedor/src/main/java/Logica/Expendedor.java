@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * La clase Expendedor proporciona metodos para realizar compras a una maquina expendedora, y obtener el vuelto si el pago excedio el precio
  */
 public class Expendedor{
-    private ArrayList<Producto>[] depositos;
+    private ArrayList<Deposito<Producto>> depositos;
     /*private Deposito<Producto> coca;
     private Deposito<Producto> sprite;
     private Deposito<Producto> fanta;
@@ -20,11 +20,11 @@ public class Expendedor{
      * @param numProductos Almacena el un entero que corresponde al numero del productos inicial con el que se quiere instanciar el expendedor
      */
     public Expendedor(int numProductos) {
-        depositos = new ArrayList[TipoProducto.values().length];
+        depositos = new ArrayList();
         for (TipoProducto producto : TipoProducto.values()) {
-            depositos[producto.ordinal()] = new ArrayList<>(numProductos);
+            depositos.add(producto.ordinal(), new Deposito<>());
             for (int i = 0; i < numProductos; i++) {
-                depositos[producto.ordinal()].add(producto.createProducto((producto.ordinal() + 1) * 100 + i));
+                depositos.get(producto.ordinal()).addObjeto(producto.createProducto((producto.ordinal() + 1) * 100 + i));
             }
         }
         vuelto = new Deposito<>();
@@ -68,15 +68,15 @@ public class Expendedor{
         }
         //Si no se cumplen ninguno de los if's anteriores entonces la moneda no es nula y el precio es mayor o igual al del producto
         if(producto == TipoProducto.COCACOLA){
-            aux = depositos[0].remove(0);
+            aux = depositos.get(0).getObjeto();
         }else if(producto == TipoProducto.SPRITE){
-            aux = depositos[1].remove(0);
+            aux = depositos.get(1).getObjeto();
         } else if(producto == TipoProducto.FANTA){
-            aux = depositos[2].remove(0);
+            aux = depositos.get(2).getObjeto();
         }else if(producto == TipoProducto.SUPER8){
-            aux = depositos[3].remove(0);
+            aux = depositos.get(3).getObjeto();
         }else if(producto == TipoProducto.SNICKER){
-            aux = depositos[4].remove(0);
+            aux = depositos.get(4).getObjeto();
         }
         if(aux == null){
             vuelto.addObjeto(m);
