@@ -33,4 +33,7 @@ public class Deposito<T> {
         }
         return deposito.remove(0);
     }
+    public int getNumeroProductos(){
+        return deposito.size();
+    }
 }

@@ -1,4 +1,4 @@
-package InterfazGrafica;
+/*package InterfazGrafica;
 
 import java.awt.*;
 import javax.swing.JPanel;
@@ -33,4 +33,4 @@ public class VistaMoneda extends JPanel {
             return Color.RED;
         }
     }
-}
+}*/

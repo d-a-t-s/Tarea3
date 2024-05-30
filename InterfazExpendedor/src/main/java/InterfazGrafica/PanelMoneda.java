@@ -1,4 +1,4 @@
-package InterfazGrafica;
+/*package InterfazGrafica;
 
 import Logica.*;
 
@@ -75,4 +75,4 @@ public class PanelMoneda extends JPanel {
         revalidate();
         repaint();
     }
-}
+}*/

@@ -19,11 +19,11 @@ public class Expendedor{
      *
      * @param numProductos Almacena el un entero que corresponde al numero del productos inicial con el que se quiere instanciar el expendedor
      */
-    public Expendedor(int numProductos) {
+    public Expendedor(int numProductos){
         depositos = new ArrayList();
         for (TipoProducto producto : TipoProducto.values()) {
             depositos.add(producto.ordinal(), new Deposito<>());
-            for (int i = 0; i < numProductos; i++) {
+            for (int i = 0; i < numProductos; i++){
                 depositos.get(producto.ordinal()).addObjeto(producto.createProducto((producto.ordinal() + 1) * 100 + i));
             }
         }
@@ -96,5 +96,8 @@ public class Expendedor{
      */
     public Moneda getVuelto(){
         return vuelto.getObjeto();
+    }
+    public ArrayList<Deposito<Producto>> getDepositos(){
+        return depositos;
     }
 }
