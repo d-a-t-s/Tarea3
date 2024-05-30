@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class PanelExpendedor extends JPanel{
     private Image imagenExpendedor;
@@ -23,11 +26,7 @@ public class PanelExpendedor extends JPanel{
         imagenExpendedor = new ImageIcon(getClass().getClassLoader().getResource("Expendedor.png")).getImage();
         Dimension size = new Dimension(imagenExpendedor.getWidth(null), imagenExpendedor.getHeight(null));
         this.setPreferredSize(size);
-        this.setMinimumSize(size);
-        this.setMaximumSize(size);
-        this.setSize(size);
         this.setLayout(null);
-
         //Paneles productos
         panelDepositoCoca = new PanelDepositoCoca(expendedor);
         this.add(panelDepositoCoca);
@@ -43,11 +42,10 @@ public class PanelExpendedor extends JPanel{
         //Panel BUY
         panelBuy = new PanelBuy();
         this.add(panelBuy);
-
-
     }
+
     @Override
-    public void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imagenExpendedor, 0, 0, null);
     }
