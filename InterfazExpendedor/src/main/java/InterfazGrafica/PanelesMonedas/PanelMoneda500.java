@@ -1,5 +1,6 @@
 package InterfazGrafica.PanelesMonedas;
 
+import InterfazGrafica.PanelComprador;
 import Logica.Moneda;
 import Logica.Moneda500;
 
@@ -9,12 +10,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class PanelMoneda500 extends JPanel{
-    private Image imagenMoneda500;
+    private final Image imagenMoneda500;
+    private final Moneda500 moneda500 = new Moneda500();
     //Constructor
     public PanelMoneda500(){
         super();
         this.setOpaque(false);
         imagenMoneda500 = new ImageIcon(getClass().getClassLoader().getResource("moneda500.png")).getImage();
+
+        this.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e){
+                PanelComprador.setMoneda(moneda500);
+            }
+        });
     }
     @Override
     public void paintComponent(Graphics g){
