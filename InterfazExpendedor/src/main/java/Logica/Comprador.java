@@ -16,16 +16,15 @@ public class Comprador{
      * @throws NoHayProductoException Excepcion en el caso de que el deposito del expendedor esté vacío o se ingrese un tipo de producto erroneo
      */
     public Comprador(Moneda m, TipoProducto producto, Expendedor exp) throws PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException{
-        Producto p = exp.comprarProducto(m, producto);
-        sonido = p.sabor();
-        while(true){
-            Moneda monedita = exp.getVuelto();
-            if(monedita == null){
-                break;
-            }else{
-                vuelto = vuelto + monedita.getValor();
-            }
-        }
+        exp.comprarProducto(m, producto);
+//        while(true){
+//            Moneda monedita = exp.getVuelto();
+//            if(monedita == null){
+//                break;
+//            }else{
+//                vuelto = vuelto + monedita.getValor();
+//            }
+//        }
     }
 
     /**
