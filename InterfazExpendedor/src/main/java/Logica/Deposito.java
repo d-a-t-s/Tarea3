@@ -36,4 +36,7 @@ public class Deposito<T> {
     public int getNumeroProductos(){
         return deposito.size();
     }
+    public T seeObjeto(int index){
+        return deposito.get(index);
+    }
 }
