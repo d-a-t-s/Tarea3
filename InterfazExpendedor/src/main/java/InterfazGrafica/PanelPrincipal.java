@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelPrincipal extends JPanel{
-    private PanelExpendedor panelExpendedor;
-    private PanelComprador panelComprador;
+    private static PanelExpendedor panelExpendedor;
+    private static PanelComprador panelComprador;
     //Constructor
     public PanelPrincipal(){
         this.setLayout(new BorderLayout());
@@ -17,5 +17,13 @@ public class PanelPrincipal extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         panelExpendedor.paintComponent(g);
+        panelComprador.paintComponents(g);
     }
+    public static PanelExpendedor getPanelExpendedor(){
+        return panelExpendedor;
+    }
+    public static PanelComprador getPanelComprador(){
+        return panelComprador;
+    }
+
 }
