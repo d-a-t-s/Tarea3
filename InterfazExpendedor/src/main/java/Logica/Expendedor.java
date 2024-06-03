@@ -7,15 +7,9 @@ import java.util.ArrayList;
  */
 public class Expendedor{
     private ArrayList<Deposito<Producto>> depositos;
-    private Deposito<Producto> productoComprado;
-    /*private Deposito<Producto> coca;
-    private Deposito<Producto> sprite;
-    private Deposito<Producto> fanta;
-    private Deposito<Producto> super8;
-    private Deposito<Producto> snicker;*/
+    private Producto productoComprado;
     private Deposito<Moneda> depositoVuelto;
     private Deposito<Moneda> depositoMonedas;
-
     /**
      * Este metodo corresponde al metodo constructor del expendedor y permite la instancia del mismo con un numero de igual de productos en cada deposito
      *
@@ -31,21 +25,6 @@ public class Expendedor{
         }
         depositoVuelto = new Deposito<>();
         depositoMonedas = new Deposito<>();
-        productoComprado = new Deposito<>();
-
-        /*coca = new Deposito<>(numProductos);
-        sprite = new Deposito<>(numProductos);
-        fanta = new Deposito<>(numProductos);
-        super8 = new Deposito<>(numProductos);
-        snicker = new Deposito<>(numProductos);
-        vuelto = new Deposito<>(0);
-        for (int i = 0; i < numProductos; i++) {
-            coca.addObjeto(new CocaCola(i + 100));
-            sprite.addObjeto(new Sprite(i + 200));
-            fanta.addObjeto(new Fanta(i + 300));
-            super8.addObjeto(new Super8(i + 400));
-            snicker.addObjeto(new Snicker(i + 500));
-    }*/
     }
 
     /**
@@ -91,7 +70,7 @@ public class Expendedor{
             depositoVuelto.addObjeto(new Moneda100());
         }
         depositoMonedas.addObjeto(m);
-        productoComprado.addObjeto(aux);
+        productoComprado = aux;
     }
 
     /**
@@ -108,7 +87,10 @@ public class Expendedor{
         return depositos;
     }
     public Producto getProducto(){
-        return productoComprado.getObjeto();
+        return productoComprado;
+    }
+    public void setProducto(Producto prod){
+        productoComprado = prod;
     }
     public Deposito getDepositoVuelto(){
         return depositoVuelto;
