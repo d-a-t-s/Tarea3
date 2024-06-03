@@ -14,6 +14,9 @@ public class PanelBuy extends JPanel{
         this.setOpaque(false);
         this.setBounds(311, 358, 74, 37);
 
+        // Cambiar el cursor del mouse al estilo "hand"
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e){

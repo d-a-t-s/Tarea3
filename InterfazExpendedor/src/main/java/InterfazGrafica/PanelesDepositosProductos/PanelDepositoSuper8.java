@@ -22,6 +22,8 @@ public class PanelDepositoSuper8 extends JPanel{
         this.setOpaque(false);
         this.setBounds(103, 470, 130, 70);
 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){

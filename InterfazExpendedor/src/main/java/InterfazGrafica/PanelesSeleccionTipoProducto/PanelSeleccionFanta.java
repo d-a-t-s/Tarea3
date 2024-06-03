@@ -23,8 +23,12 @@ public class PanelSeleccionFanta extends JPanel implements PanelSeleccionable {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                GestorSeleccion.seleccionarPanel(PanelSeleccionFanta.this);
-                PanelExpendedor.setProducto(fanta);
+                if (isSelected) {
+                    GestorSeleccion.deseleccionarTodos();
+                } else {
+                    GestorSeleccion.seleccionarPanel(PanelSeleccionFanta.this);
+                    PanelExpendedor.setProducto(fanta);
+                }
             }
         });
     }
