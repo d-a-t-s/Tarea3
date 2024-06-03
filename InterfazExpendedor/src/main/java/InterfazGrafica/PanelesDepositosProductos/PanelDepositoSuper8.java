@@ -12,7 +12,7 @@ import java.util.Random;
 public class PanelDepositoSuper8 extends JPanel{
     private Expendedor expendedor;
     private int numSuper8;
-    Image imagenSuper8 = new ImageIcon(getClass().getClassLoader().getResource("Super8.png")).getImage();
+    private final Image imagenSuper8 = new ImageIcon(getClass().getClassLoader().getResource("Super8.png")).getImage();
     //Constructor
     public PanelDepositoSuper8(Expendedor expendedor){
         super();

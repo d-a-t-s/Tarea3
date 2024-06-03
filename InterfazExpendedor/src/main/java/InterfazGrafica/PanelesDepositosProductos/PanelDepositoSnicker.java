@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class PanelDepositoSnicker extends JPanel{
     private Expendedor expendedor;
-    Image imagenSnicker = new ImageIcon(getClass().getClassLoader().getResource("Snicker.png")).getImage();
+    private final Image imagenSnicker = new ImageIcon(getClass().getClassLoader().getResource("Snicker.png")).getImage();
     //Constructor
     public PanelDepositoSnicker(Expendedor expendedor){
         super();

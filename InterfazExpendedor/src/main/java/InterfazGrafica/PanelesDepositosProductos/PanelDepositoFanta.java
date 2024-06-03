@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class PanelDepositoFanta extends JPanel{
     private Expendedor expendedor;
-    Image imagenFanta = new ImageIcon(getClass().getClassLoader().getResource("Fanta.png")).getImage();
+    private final Image imagenFanta = new ImageIcon(getClass().getClassLoader().getResource("Fanta.png")).getImage();
     //Constructor
     public PanelDepositoFanta(Expendedor expendedor){
         super();

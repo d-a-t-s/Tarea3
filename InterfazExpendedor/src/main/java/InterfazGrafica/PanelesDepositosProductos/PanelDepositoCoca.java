@@ -1,6 +1,5 @@
 package InterfazGrafica.PanelesDepositosProductos;
 
-
 import Logica.*;
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.util.Random;
 
 public class PanelDepositoCoca extends JPanel{
     private Expendedor expendedor;
-    Image imagenCoca = new ImageIcon(getClass().getClassLoader().getResource("Cocacola.png")).getImage();
+    private final Image imagenCoca = new ImageIcon(getClass().getClassLoader().getResource("Cocacola.png")).getImage();
     //Constructor
     public PanelDepositoCoca(Expendedor expendedor){
         super();

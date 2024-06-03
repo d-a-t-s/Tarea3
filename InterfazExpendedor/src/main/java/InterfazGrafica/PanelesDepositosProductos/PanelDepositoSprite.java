@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class PanelDepositoSprite extends JPanel{
     private Expendedor expendedor;
-    Image imagenSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprite.png")).getImage();
+    private final Image imagenSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprite.png")).getImage();
     //Constructor
     public PanelDepositoSprite(Expendedor expendedor){
         super();
