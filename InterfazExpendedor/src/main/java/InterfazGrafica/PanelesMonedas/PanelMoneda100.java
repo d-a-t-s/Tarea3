@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 
 public class PanelMoneda100 extends JPanel{
     private final Image imagenMoneda100;
-    private final Moneda100 moneda100 = new Moneda100();
     //Constructor
     public PanelMoneda100(){
         super();
@@ -22,7 +21,7 @@ public class PanelMoneda100 extends JPanel{
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){ //Que tan bueno es instanciar de nuevo a "moneda" por cada click?
-                PanelComprador.setMoneda(moneda100);
+                PanelComprador.setMoneda(new Moneda100());
             }
         });
     }

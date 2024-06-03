@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 
 public class PanelMoneda1000 extends JPanel{
     private final Image imagenMoneda1000;
-    private final Moneda1000 moneda1000 = new Moneda1000();
     //Constructor
     public PanelMoneda1000(){
         super();
@@ -20,7 +19,7 @@ public class PanelMoneda1000 extends JPanel{
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e){
-                PanelComprador.setMoneda(moneda1000);
+                PanelComprador.setMoneda(new Moneda1000());
             }
         });
     }
