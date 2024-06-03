@@ -19,6 +19,8 @@ public class PanelBuy extends JPanel{
             public void mouseReleased(MouseEvent e){
                 try{
                     PanelComprador.setComprador(new Comprador(PanelComprador.getMoneda(), PanelExpendedor.getProducto(), PanelExpendedor.getExpendedor()));
+                    //ACA SE PUEDE HACER NULL LA MONEDA DEL COMPRADOR PARA DAR LA IMPRESION DE QUE SU MONEDA SE LA LLAVO EL EXPENDEDOR Y POR TANTO SE QUEDA SIN MONEDA
+                    PanelComprador.setMoneda(null);
 //                    PanelPrincipal.getPanelComprador().repaint();
                     PanelPrincipal.getPanelExpendedor().repaint();
 //                    System.out.println("Producto: " + PanelComprador.getComprador().queConsumiste());
@@ -30,6 +32,7 @@ public class PanelBuy extends JPanel{
                 }catch(NoHayProductoException NoHayProductoException){
                     System.out.println("El deposito está vacio o no se ingreso un tipo de producto\n");
                 }finally{
+                    PanelComprador.setMoneda(null);
                     PanelPrincipal.getPanelExpendedor().repaint();
                 }
             }

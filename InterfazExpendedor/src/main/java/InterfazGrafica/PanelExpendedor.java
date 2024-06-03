@@ -57,7 +57,7 @@ public class PanelExpendedor extends JPanel{
         panelInsertarMoneda = new PanelInsertarMoneda();
         this.add(panelInsertarMoneda);
         //Panel deposito del producto comprado
-        panelDepositoCompra = new PanelDepositoCompra();
+        panelDepositoCompra = new PanelDepositoCompra(expendedor);
         this.add(panelDepositoCompra);
         //Paneles vuelto y compra
         panelDepositoVuelto = new PanelDepositoVuelto(expendedor);

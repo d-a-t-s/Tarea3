@@ -4,6 +4,8 @@ import Logica.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelDepositoVuelto extends JPanel{
     private Expendedor expendedor;
@@ -17,6 +19,20 @@ public class PanelDepositoVuelto extends JPanel{
         this.expendedor = expendedor;
         this.setOpaque(false);
         this.setBounds(319, 418, 26, 104);
+
+
+        this.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e){
+                if(expendedor.getDepositoVuelto().getNumeroProductos() == 0){
+
+                }else{
+                    PanelSuperior.setVuelto(expendedor.getVuelto().getValor());
+                    repaint();
+                    PanelPrincipal.getPanelSuperior().repaint();
+                }
+            }
+        });
     }
     @Override
     public void paintComponent(Graphics g){
