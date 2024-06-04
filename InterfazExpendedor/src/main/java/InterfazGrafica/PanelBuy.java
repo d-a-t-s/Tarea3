@@ -50,8 +50,6 @@ public class PanelBuy extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                isPressed = false;
-                repaint(); // Vuelve a pintar el botón para reflejar el cambio de estado
                 try {
                     PanelComprador.setComprador(new Comprador(PanelComprador.getMoneda(), PanelExpendedor.getProducto(), PanelExpendedor.getExpendedor()));
                     //ACA SE PUEDE HACER NULL LA MONEDA DEL COMPRADOR PARA DAR LA IMPRESION DE QUE SU MONEDA SE LA LLAVO EL EXPENDEDOR Y POR TANTO SE QUEDA SIN MONEDA
@@ -60,11 +58,11 @@ public class PanelBuy extends JPanel {
                     GestorSeleccion.deseleccionarTodos();
                     GestorSeleccionMonedas.deseleccionarTodos();
                 } catch (Logica.PagoIncorrectoException PagoIncorrectoException) {
-                    System.out.println("Para comprar debe introducir una moneda primero\n");
+                    JOptionPane.showMessageDialog(null, "Para comprar debe introducir una moneda primero", "Error de pago", JOptionPane.ERROR_MESSAGE);
                 } catch (Logica.PagoInsuficienteException PagoInsuficienteException) {
-                    System.out.println("El pago que a ingresado es menor al precio del producto\n");
+                    JOptionPane.showMessageDialog(null, "El pago que ha ingresado es menor al precio del producto", "Error de pago", JOptionPane.ERROR_MESSAGE);
                 } catch (NoHayProductoException NoHayProductoException) {
-                    System.out.println("El deposito está vacio o no se ingreso un tipo de producto\n");
+                    JOptionPane.showMessageDialog(null, "El depósito está vacío o no se ha ingresado un tipo de producto", "Error de producto", JOptionPane.ERROR_MESSAGE);
                 } finally {
                     PanelComprador.setMoneda(null);
                     PanelPrincipal.getPanelExpendedor().repaint();
@@ -87,17 +85,5 @@ public class PanelBuy extends JPanel {
         }
 
         g2d.dispose();
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("PanelBuy Test");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
-        frame.setLayout(new BorderLayout());
-
-        PanelBuy panelBuy = new PanelBuy();
-        frame.add(panelBuy, BorderLayout.CENTER);
-
-        frame.setVisible(true);
     }
 }
