@@ -14,6 +14,7 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
     private final int imageWidth;
     private final int imageHeight;
     private boolean isSelected = false;
+    private boolean isMouseOver = false;
 
     // Constructor
     public PanelMoneda100() {
@@ -29,7 +30,21 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
                 if (!isSelected) {
                     PanelComprador.setMoneda(new Moneda100());
                 }
+                isSelected = !isSelected; // Invertir el estado de isSelected
+                repaint();
                 GestorSeleccionMonedas.seleccionarPanel(PanelMoneda100.this);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                isMouseOver = true;
+                repaint();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                isMouseOver = false;
+                repaint();
             }
         });
     }
@@ -38,10 +53,29 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+
+        // Calcular la posición de dibujo para centrar la imagen
+        int x = (getWidth() - imageWidth) / 2;
+        int y = (getHeight() - imageHeight) / 2;
+
+        // Ajustar el tamaño de la moneda
         int drawWidth = isSelected ? (int) (imageWidth * 1.05) : imageWidth;
         int drawHeight = isSelected ? (int) (imageHeight * 1.05) : imageHeight;
-        g2d.drawImage(imagenMoneda100, 10, -4, drawWidth, drawHeight, null);
+
+        // Dibujar rectángulo semitransparente detrás de la moneda si se pasa el ratón sobre ella
+        if (isMouseOver) {
+            g2d.setColor(new Color(255, 255, 255, 50)); // Color semitransparente
+            g2d.fillRect(x, y, imageWidth, imageHeight);
+        }
+
+        // Dibujar imagen de la moneda
+        g2d.drawImage(imagenMoneda100, x, y, drawWidth, drawHeight, null);
+
+        // Efecto de sombra o reflejo
+        g2d.setColor(new Color(255, 255, 255, 50)); // Color negro semitransparente
+        g2d.fillRect(x, y + drawHeight, drawWidth, 0); // Dibujar una sombra debajo de la moneda
     }
+
 
     @Override
     public void setSeleccionado(boolean seleccionado) {
