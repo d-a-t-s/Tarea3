@@ -1,5 +1,7 @@
 package InterfazGrafica;
 
+import InterfazGrafica.PanelesMonedas.GestorSeleccionMonedas;
+import InterfazGrafica.PanelesSeleccionTipoProducto.GestorSeleccion;
 import Logica.*;
 
 import javax.swing.*;
@@ -28,6 +30,8 @@ public class PanelBuy extends JPanel{
                     PanelPrincipal.getPanelExpendedor().repaint();
 //                    System.out.println("Producto: " + PanelComprador.getComprador().queConsumiste());
 //                    System.out.println("VUELTO: " + PanelComprador.getComprador().cuantoVuelto());
+                    GestorSeleccion.deseleccionarTodos();
+                    GestorSeleccionMonedas.deseleccionarTodos();
                 }catch(Logica.PagoIncorrectoException PagoIncorrectoException){
                     System.out.println("Para comprar debe introducir una moneda primero\n");
                 }catch(Logica.PagoInsuficienteException PagoInsuficienteException){

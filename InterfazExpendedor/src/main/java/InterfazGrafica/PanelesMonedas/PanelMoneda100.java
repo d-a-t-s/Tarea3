@@ -1,7 +1,6 @@
 package InterfazGrafica.PanelesMonedas;
 
 import InterfazGrafica.PanelComprador;
-import InterfazGrafica.PanelesSeleccionTipoProducto.GestorSeleccion;
 import InterfazGrafica.PanelesSeleccionTipoProducto.PanelSeleccionable;
 import Logica.Moneda100;
 
@@ -27,15 +26,10 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (isSelected) {
-                    // Si ya está seleccionado, deselecciona
-                    setSeleccionado(false);
-                } else {
-                    // Si no está seleccionado, selecciona
+                if (!isSelected) {
                     PanelComprador.setMoneda(new Moneda100());
-                    GestorSeleccion.deseleccionarTodos();
-                    setSeleccionado(true);
                 }
+                GestorSeleccionMonedas.seleccionarPanel(PanelMoneda100.this);
             }
         });
     }
