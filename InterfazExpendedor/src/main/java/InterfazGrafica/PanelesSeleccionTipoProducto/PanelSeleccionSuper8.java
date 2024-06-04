@@ -3,14 +3,19 @@ package InterfazGrafica.PanelesSeleccionTipoProducto;
 import InterfazGrafica.PanelExpendedor;
 import Logica.TipoProducto;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 public class PanelSeleccionSuper8 extends JPanel implements PanelSeleccionable {
     private final TipoProducto super8 = TipoProducto.SUPER8;
     private boolean isSelected = false;
+    private Clip clip;
 
     // Constructor
     public PanelSeleccionSuper8() {
@@ -23,11 +28,25 @@ public class PanelSeleccionSuper8 extends JPanel implements PanelSeleccionable {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (isSelected) {
-                    GestorSeleccion.deseleccionarTodos();
-                } else {
-                    GestorSeleccion.seleccionarPanel(PanelSeleccionSuper8.this);
-                    PanelExpendedor.setProducto(super8);
+                try {
+                    // Cargar el archivo de sonido
+                    File soundFile = new File("seleccionarproductos.wav");
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+                    // Obtener un Clip de sonido
+                    clip = AudioSystem.getClip();
+                    // Abrir el archivo de sonido
+                    clip.open(audioIn);
+                    // Reproducir el sonido
+                    clip.start();
+
+                    if (isSelected) {
+                        GestorSeleccion.deseleccionarTodos();
+                    } else {
+                        GestorSeleccion.seleccionarPanel(PanelSeleccionSuper8.this);
+                        PanelExpendedor.setProducto(super8);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
