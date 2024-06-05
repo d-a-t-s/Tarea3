@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.sound.sampled.*;
+import java.io.*;
 
 public class PanelDepositoVuelto extends JPanel {
     private Expendedor expendedor;
@@ -13,13 +15,24 @@ public class PanelDepositoVuelto extends JPanel {
     private final Image monedita500 = new ImageIcon(getClass().getClassLoader().getResource("Monedita500.png")).getImage();
     private final Image monedita1000 = new ImageIcon(getClass().getClassLoader().getResource("Monedita1000.png")).getImage();
     private final Image monedita1500 = new ImageIcon(getClass().getClassLoader().getResource("Monedita1500.png")).getImage();
+    private Clip clip;
 
-    //Constructor
+    // Constructor
     public PanelDepositoVuelto(Expendedor expendedor) {
         super();
         this.expendedor = expendedor;
         this.setOpaque(false);
         this.setBounds(319, 418, 26, 104);
+
+        // Cargar el archivo de sonido
+        try {
+            File soundFile = new File("vuelto.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -28,6 +41,13 @@ public class PanelDepositoVuelto extends JPanel {
                     PanelSuperior.setVuelto(expendedor.getVuelto().getValor());
                     repaint();
                     PanelPrincipal.getPanelSuperior().repaint();
+
+                    // Reproducir el sonido
+                    if (clip != null) {
+                        clip.stop(); // Detiene el sonido si ya está reproduciéndose
+                        clip.setFramePosition(0); // Vuelve al principio del sonido
+                        clip.start(); // Reproduce el sonido
+                    }
                 }
             }
         });

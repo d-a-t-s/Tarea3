@@ -39,13 +39,6 @@ public class PanelBuy extends JPanel {
             public void mousePressed(MouseEvent e) {
                 isPressed = true;
                 repaint(); // Vuelve a pintar el botón para reflejar el cambio de estado
-
-                // Reproducir el sonido
-                if (clip != null) {
-                    clip.stop(); // Detiene el sonido si ya está reproduciéndose
-                    clip.setFramePosition(0); // Vuelve al principio del sonido
-                    clip.start(); // Reproduce el sonido
-                }
             }
 
             @Override
@@ -57,6 +50,14 @@ public class PanelBuy extends JPanel {
                     PanelPrincipal.getPanelExpendedor().repaint();
                     GestorSeleccion.deseleccionarTodos();
                     GestorSeleccionMonedas.deseleccionarTodos();
+
+                    // Reproducir el sonido
+                    if (clip != null) {
+                        clip.stop(); // Detiene el sonido si ya está reproduciéndose
+                        clip.setFramePosition(0); // Vuelve al principio del sonido
+                        clip.start(); // Reproduce el sonido
+                    }
+
                 } catch (Logica.PagoIncorrectoException PagoIncorrectoException) {
                     JOptionPane.showMessageDialog(null, "Para comprar debe introducir una moneda primero", "Error de pago", JOptionPane.ERROR_MESSAGE);
                 } catch (Logica.PagoInsuficienteException PagoInsuficienteException) {
@@ -67,6 +68,9 @@ public class PanelBuy extends JPanel {
                     PanelComprador.setMoneda(null);
                     PanelPrincipal.getPanelExpendedor().repaint();
                 }
+                // Restablecer el estado del botón y repintar
+                isPressed = false;
+                repaint();
             }
         });
     }

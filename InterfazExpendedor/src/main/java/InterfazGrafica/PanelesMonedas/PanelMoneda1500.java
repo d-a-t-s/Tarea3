@@ -2,37 +2,57 @@ package InterfazGrafica.PanelesMonedas;
 
 import InterfazGrafica.PanelComprador;
 import InterfazGrafica.PanelesSeleccionTipoProducto.PanelSeleccionable;
-import Logica.Moneda1500; // Cambio de Moneda100 a Moneda1500
+import Logica.Moneda1500;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.sound.sampled.*;
+import java.io.*;
 
-public class PanelMoneda1500 extends JPanel implements PanelSeleccionable { // Cambio de PanelMoneda100 a PanelMoneda1500
-    private final Image imagenMoneda1500; // Cambio de imagenMoneda100 a imagenMoneda1500
+public class PanelMoneda1500 extends JPanel implements PanelSeleccionable {
+    private final Image imagenMoneda1500;
     private final int imageWidth;
     private final int imageHeight;
     private boolean isSelected = false;
     private boolean isMouseOver = false;
+    private Clip clip;
 
     // Constructor
     public PanelMoneda1500() {
         super();
         this.setOpaque(false);
-        imagenMoneda1500 = new ImageIcon(getClass().getClassLoader().getResource("moneda1500.png")).getImage(); // Cambio de moneda100.png a moneda1500.png
+        imagenMoneda1500 = new ImageIcon(getClass().getClassLoader().getResource("moneda1500.png")).getImage();
         imageWidth = imagenMoneda1500.getWidth(null);
         imageHeight = imagenMoneda1500.getHeight(null);
+
+        // Cargar el archivo de sonido
+        try {
+            File soundFile = new File("monedas.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (!isSelected) {
-                    PanelComprador.setMoneda(new Moneda1500()); // Cambio de Moneda100 a Moneda1500
+                    PanelComprador.setMoneda(new Moneda1500());
                 }
                 isSelected = !isSelected; // Invertir el estado de isSelected
                 repaint();
                 GestorSeleccionMonedas.seleccionarPanel(PanelMoneda1500.this);
+
+                // Reproducir el sonido
+                if (clip != null) {
+                    clip.stop(); // Detiene el sonido si ya está reproduciéndose
+                    clip.setFramePosition(0); // Vuelve al principio del sonido
+                    clip.start(); // Reproduce el sonido
+                }
             }
 
             @Override
@@ -69,10 +89,10 @@ public class PanelMoneda1500 extends JPanel implements PanelSeleccionable { // C
         }
 
         // Dibujar imagen de la moneda
-        g2d.drawImage(imagenMoneda1500, x, y, drawWidth, drawHeight, null); // Cambio de imagenMoneda100 a imagenMoneda1500
+        g2d.drawImage(imagenMoneda1500, x, y, drawWidth, drawHeight, null);
 
         // Efecto de sombra o reflejo
-        g2d.setColor(new Color(255, 255, 255, 50)); // Color negro semitransparente
+        g2d.setColor(new Color(255, 255, 255, 50)); // Color blanco semitransparente
         g2d.fillRect(x, y + drawHeight, drawWidth, 0); // Dibujar una sombra debajo de la moneda
     }
 

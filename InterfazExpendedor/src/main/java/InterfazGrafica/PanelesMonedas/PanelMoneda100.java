@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.sound.sampled.*;
+import java.io.*;
 
 public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
     private final Image imagenMoneda100;
@@ -15,6 +17,7 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
     private final int imageHeight;
     private boolean isSelected = false;
     private boolean isMouseOver = false;
+    private Clip clip;
 
     // Constructor
     public PanelMoneda100() {
@@ -23,6 +26,16 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
         imagenMoneda100 = new ImageIcon(getClass().getClassLoader().getResource("moneda100.png")).getImage();
         imageWidth = imagenMoneda100.getWidth(null);
         imageHeight = imagenMoneda100.getHeight(null);
+
+        // Cargar el archivo de sonido
+        try {
+            File soundFile = new File("monedas.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -33,6 +46,13 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
                 isSelected = !isSelected; // Invertir el estado de isSelected
                 repaint();
                 GestorSeleccionMonedas.seleccionarPanel(PanelMoneda100.this);
+
+                // Reproducir el sonido
+                if (clip != null) {
+                    clip.stop(); // Detiene el sonido si ya está reproduciéndose
+                    clip.setFramePosition(0); // Vuelve al principio del sonido
+                    clip.start(); // Reproduce el sonido
+                }
             }
 
             @Override
@@ -72,10 +92,9 @@ public class PanelMoneda100 extends JPanel implements PanelSeleccionable {
         g2d.drawImage(imagenMoneda100, x, y, drawWidth, drawHeight, null);
 
         // Efecto de sombra o reflejo
-        g2d.setColor(new Color(255, 255, 255, 50)); // Color negro semitransparente
+        g2d.setColor(new Color(255, 255, 255, 50)); // Color blanco semitransparente
         g2d.fillRect(x, y + drawHeight, drawWidth, 0); // Dibujar una sombra debajo de la moneda
     }
-
 
     @Override
     public void setSeleccionado(boolean seleccionado) {
