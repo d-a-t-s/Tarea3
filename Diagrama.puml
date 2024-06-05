@@ -1,0 +1,488 @@
+@startuml
+
+package Logica{
+
+    class CocaCola {
+        + sabor() : String
+    }
+
+    class Comprador {
+        - sonido : String
+        - vuelto : int
+
+        +cuantoVuelto() : int
+        +queConsumiste() : String
+    }
+
+    class Deposito<T> {
+        -  deposito : ArrayList<T>
+
+        +  addObjeto(T t) : void
+        + getObjeto() : T
+        +  getNumeroProductos() : int
+        +  seeObjeto(int index) : T
+    }
+
+    class Expendedor {
+        - depositos :  ArrayList<Deposito<Producto>>
+        -  productoComprado : Producto
+        - depositoVuelto :  Deposito<Moneda>
+        - depositoMonedas : Deposito<Moneda>
+
+        +comprarProducto(Moneda m, TipoProducto producto) : void
+        +  getVuelto() : Moneda
+        +  getPago() : Moneda
+        +  getDepositos() : ArrayList<Deposito<Producto>>
+        +  getProducto() : Producto
+        +  setProducto(Producto prod) : void
+        +  getDepositoVuelto() : Deposito
+        +  getDepositoMonedas() : Deposito
+    }
+
+    class Fanta extends Producto {
+        +  sabor() : String
+    }
+
+    abstract class Moneda implements Comparable<Moneda> {
+        + compareTo(Moneda moneda) : int
+        +  getSerie() : v
+        + abstract  getValor() : int
+    }
+
+    interface Comparable{
+        + compareTo() : int
+    }
+
+    class Moneda100 extends Moneda {
+        +  getValor() : int
+    }
+
+    class Moneda500 extends Moneda {
+        +  getValor() : int
+    }
+
+    class Moneda1000 extends Moneda {
+        +  getValor() : int
+    }
+
+    class Moneda1500 extends Moneda {
+        +  getValor() : int
+    }
+
+    abstract class Producto {
+        - serieProducto: int
+
+        + abstract sabor(): String
+    }
+
+    class Snicker {
+
+        + sabor(): String
+    }
+
+    class Sprite {
+
+        + sabor(): String
+    }
+
+    class Super8 {
+
+        + sabor(): String
+    }
+
+    enum TipoProducto {
+        COCACOLA,
+        SPRITE,
+        FANTA,
+        SUPER8,
+        SNICKER
+    }
+
+    Expendedor *-- Deposito
+    Expendedor ..> TipoProducto
+    Comprador --o Expendedor
+    Expendedor o-- Producto
+    Expendedor o-- Moneda
+    CocaCola --|> Producto
+    Snicker --|> Producto
+    Sprite --|> Producto
+    Super8 --|> Producto
+}
+
+package InterfazGrafica{
+
+    class ExpendedorFrame {
+        - panelExpendedor: PanelExpendedor
+        + ExpendedorFrame()
+        + initUI(): void
+        + main(args: String[]): void
+    }
+
+    class InterfazGUI {
+        + main(args: String[]): void
+    }
+
+    class PanelBuy {
+        - isPressed: boolean
+        - clip: Clip
+        + PanelBuy()
+        # paintComponent(g: Graphics): void
+    }
+
+     class PanelComprador {
+        - comprador: Comprador
+        - moneda: Moneda
+        - panelMoneda100: PanelMoneda100
+        - panelMoneda500: PanelMoneda500
+        - panelMoneda1000: PanelMoneda1000
+        - panelMoneda1500: PanelMoneda1500
+        - color: Color
+        + PanelComprador()
+        + getComprador(): Comprador
+        + setComprador(comp: Comprador): void
+        + getMoneda(): Moneda
+        + setMoneda(mon: Moneda): void
+    }
+
+    class PanelDepositoCompra {
+        - imagenCoca: Image
+        - imagenSprite: Image
+        - imagenFanta: Image
+        - imagenSuper8: Image
+        - imagenSnicker: Image
+        - producto: int
+        - expendedor: Expendedor
+        - isButtonEnabled: boolean
+        + PanelDepositoCompra(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoMonedas {
+        - monedita100: Image
+        - monedita500: Image
+        - monedita1000: Image
+        - monedita1500: Image
+        - expendedor: Expendedor
+        + PanelDepositoMonedas(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoVuelto {
+        - expendedor: Expendedor
+        - monedita100: Image
+        - monedita500: Image
+        - monedita1000: Image
+        - monedita1500: Image
+        - clip: Clip
+        + PanelDepositoVuelto(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelExpendedor {
+        - imagenExpendedor: Image
+        - panelDepositoCoca: PanelDepositoCoca
+        - panelDepositoSprite: PanelDepositoSprite
+        - panelDepositoFanta: PanelDepositoFanta
+        - panelDepositoSuper8: PanelDepositoSuper8
+        - panelDepositoSnicker: PanelDepositoSnicker
+        - panelSeleccionCocacola: PanelSeleccionCocacola
+        - panelSeleccionSprite: PanelSeleccionSprite
+        - panelSeleccionFanta: PanelSeleccionFanta
+        - panelSeleccionSuper8: PanelSeleccionSuper8
+        - panelSeleccionSnicker: PanelSeleccionSnicker
+        - panelBuy: PanelBuy
+        - panelDepositoVuelto: PanelDepositoVuelto
+        - panelDepositoMonedas: PanelDepositoMonedas
+        - panelDepositoCompra: PanelDepositoCompra
+        - expendedor: Expendedor
+        - producto: TipoProducto
+        - test: JPanel
+        + PanelExpendedor()
+        + paintComponent(g: Graphics): void
+        + getExpendedor(): Expendedor
+        + setExpendedor(exp: Expendedor): void
+        + getProducto(): TipoProducto
+        + setProducto(prod: TipoProducto): void
+    }
+
+    class PanelPrincipal {
+        - panelExpendedor: PanelExpendedor
+        - panelComprador: PanelComprador
+        + panelSuperior: PanelSuperior
+        + PanelPrincipal()
+        + paintComponent(g: Graphics): void
+        + getPanelExpendedor(): PanelExpendedor
+        + getPanelComprador(): PanelComprador
+        + getPanelSuperior(): PanelSuperior
+    }
+
+    class PanelProductoComprado {
+        - color: Color
+        - producto: int
+        - cocaCompra: Image
+        - spriteCompra: Image
+        - fantaCompra: Image
+        - super8Compra: Image
+        - snickerCompra: Image
+        + PanelProductoComprado()
+        + paintComponent(g: Graphics): void
+        + setProducto(n: int): void
+    }
+
+    class PanelSuperior {
+        - imagenMonedero: Image
+        - panelProductoComprado: PanelProductoComprado
+        - color: Color
+        - vuelto: int
+        + PanelSuperior()
+        + paintComponent(g: Graphics): void
+        + setVuelto(n: int): void
+        + getPanelProductoComprado(): PanelProductoComprado
+    }
+
+     class Ventana {
+        - panelPrincipal: PanelPrincipal
+        + Ventana()
+    }
+
+    class PanelDepositoCoca {
+        - expendedor: Expendedor
+        - imagenCoca: Image
+        + PanelDepositoCoca(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoFanta {
+        - expendedor: Expendedor
+        - imagenFanta: Image
+        + PanelDepositoFanta(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoSnicker {
+        - expendedor: Expendedor
+        - imagenSnicker: Image
+        + PanelDepositoSnicker(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoSprite {
+        - expendedor: Expendedor
+        - imagenSprite: Image
+        + PanelDepositoSprite(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+    class PanelDepositoSuper8 {
+        - expendedor: Expendedor
+        - numSuper8: int
+        - imagenSuper8: Image
+        + PanelDepositoSuper8(expendedor: Expendedor)
+        + paintComponent(g: Graphics): void
+    }
+
+     class GestorSeleccionMonedas {
+        - ultimoPanelSeleccionado: PanelSeleccionable
+        + seleccionarPanel(panel: PanelSeleccionable): void
+        + deseleccionarTodos(): void
+    }
+
+    class PanelMoneda100 {
+        - imagenMoneda100: Image
+        - imageWidth: int
+        - imageHeight: int
+        - isSelected: boolean
+        - isMouseOver: boolean
+        - clip: Clip
+        + PanelMoneda100()
+        + paintComponent(g: Graphics): void
+        + setSeleccionado(seleccionado: boolean): void
+        + isSelected(): boolean
+    }
+
+    class PanelMoneda500 {
+        - imagenMoneda500: Image
+        - imageWidth: int
+        - imageHeight: int
+        - isSelected: boolean
+        - isMouseOver: boolean
+        - clip: Clip
+        + PanelMoneda500()
+        + paintComponent(g: Graphics): void
+        + setSeleccionado(seleccionado: boolean): void
+        + isSelected(): boolean
+    }
+
+    class PanelMoneda1000 {
+        - imagenMoneda1000: Image
+        - imageWidth: int
+        - imageHeight: int
+        - isSelected: boolean
+        - isMouseOver: boolean
+        - clip: Clip
+        + PanelMoneda1000()
+        + paintComponent(g: Graphics): void
+        + setSeleccionado(seleccionado: boolean): void
+        + isSelected(): boolean
+    }
+
+    class PanelMoneda1500 {
+        - imagenMoneda1500: Image
+        - imageWidth: int
+        - imageHeight: int
+        - isSelected: boolean
+        - isMouseOver: boolean
+        - clip: Clip
+        + PanelMoneda1500()
+        + paintComponent(g: Graphics): void
+        + setSeleccionado(seleccionado: boolean): void
+        + isSelected(): boolean
+    }
+
+    class GestorSeleccion {
+        - ultimoPanelSeleccionado: PanelSeleccionable
+        + seleccionarPanel(panel: PanelSeleccionable): void
+        + deseleccionarTodos(): void
+    }
+
+    interface PanelSeleccionable {
+        {abstract} +setSeleccionado(seleccionado: boolean): void
+        {abstract} +isSelected(): boolean
+    }
+
+    class PanelSeleccionCocacola {
+        - coca: TipoProducto
+        - isSelected: boolean
+        - clip: Clip
+
+        {method} +PanelSeleccionCocacola()
+        {method} +paintComponent(g: Graphics): void
+        {method} +setSeleccionado(seleccionado: boolean): void
+        {method} +isSelected(): boolean
+    }
+
+    class PanelSeleccionFanta {
+        - fanta: TipoProducto
+        - isSelected: boolean
+        - clip: Clip
+
+        {method} +PanelSeleccionFanta()
+        {method} +paintComponent(g: Graphics): void
+        {method} +setSeleccionado(seleccionado: boolean): void
+        {method} +isSelected(): boolean
+    }
+
+    class PanelSeleccionSnicker {
+        - snicker: TipoProducto
+        - isSelected: boolean
+        - clip: Clip
+
+        {method} +PanelSeleccionSnicker()
+        {method} +paintComponent(g: Graphics): void
+        {method} +setSeleccionado(seleccionado: boolean): void
+        {method} +isSelected(): boolean
+    }
+
+    class PanelSeleccionSprite {
+        - sprite: TipoProducto
+        - isSelected: boolean
+        - clip: Clip
+
+        {method} +PanelSeleccionSprite()
+        {method} +paintComponent(g: Graphics): void
+        {method} +setSeleccionado(seleccionado: boolean): void
+        {method} +isSelected(): boolean
+    }
+
+    class PanelSeleccionSuper8 {
+        - super8: TipoProducto
+        - isSelected: boolean
+        - clip: Clip
+
+        {method} +PanelSeleccionSuper8()
+        {method} +paintComponent(g: Graphics): void
+        {method} +setSeleccionado(seleccionado: boolean): void
+        {method} +isSelected(): boolean
+    }
+
+    ExpendedorFrame -- PanelExpendedor
+    Ventana -- InterfazGUI
+    Ventana -- PanelPrincipal
+
+    PanelBuy -- PanelComprador
+    PanelBuy -- PanelPrincipal
+    PanelBuy -- PanelExpendedor
+
+    PanelComprador -- PanelMoneda100
+    PanelComprador -- PanelMoneda500
+    PanelComprador -- PanelMoneda1000
+    PanelComprador -- PanelMoneda1500
+
+    PanelDepositoCompra -- PanelSuperior
+    PanelDepositoCompra -- PanelProductoComprado
+
+    PanelDepositoVuelto -- PanelSuperior
+    PanelDepositoCompra -- PanelPrincipal
+
+    PanelExpendedor -- PanelDepositoCoca
+    PanelExpendedor -- PanelDepositoSprite
+    PanelExpendedor -- PanelDepositoFanta
+    PanelExpendedor -- PanelDepositoSuper8
+    PanelExpendedor -- PanelDepositoSnicker
+    PanelExpendedor -- PanelSeleccionCocacola
+    PanelExpendedor -- PanelSeleccionSprite
+    PanelExpendedor -- PanelSeleccionFanta
+    PanelExpendedor -- PanelSeleccionSuper8
+    PanelExpendedor -- PanelSeleccionSnicker
+    PanelExpendedor -- PanelBuy
+    PanelExpendedor -- PanelDepositoVuelto
+    PanelExpendedor -- PanelDepositoMonedas
+    PanelExpendedor -- PanelDepositoCompra
+
+    PanelPrincipal -- PanelExpendedor
+    PanelPrincipal -- PanelComprador
+    PanelPrincipal -- PanelSuperior
+
+    PanelSuperior -- PanelProductoComprado
+
+    GestorSeleccion -- PanelSeleccionable
+
+    PanelSeleccionCocacola -- PanelSeleccionable
+    PanelSeleccionCocacola -- GestorSeleccion
+    PanelSeleccionCocacola -- PanelExpendedor
+
+    PanelSeleccionFanta -- PanelSeleccionable
+    PanelSeleccionFanta -- GestorSeleccion
+    PanelSeleccionFanta -- PanelExpendedor
+
+    PanelSeleccionSnicker -- PanelSeleccionable
+    PanelSeleccionSnicker -- GestorSeleccion
+    PanelSeleccionSnicker -- PanelExpendedor
+
+    PanelSeleccionSprite -- PanelSeleccionable
+    PanelSeleccionSprite -- GestorSeleccion
+    PanelSeleccionSprite -- PanelExpendedor
+
+    PanelSeleccionSuper8 -- PanelSeleccionable
+    PanelSeleccionSuper8 -- GestorSeleccion
+    PanelSeleccionSuper8 -- PanelExpendedor
+
+    GestorSeleccionMonedas -- PanelSeleccionable
+
+    PanelMoneda100 -- PanelSeleccionable
+    PanelMoneda100 -- PanelComprador
+
+    PanelMoneda500 -- PanelSeleccionable
+    PanelMoneda500 -- PanelComprador
+
+    PanelMoneda1000 -- PanelSeleccionable
+    PanelMoneda1000 -- PanelComprador
+
+    PanelMoneda1500 -- PanelSeleccionable
+    PanelMoneda1500 -- PanelComprador
+}
+
+
+
+
+@enduml
