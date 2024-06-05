@@ -11,6 +11,11 @@ import java.awt.event.MouseEvent;
 import javax.sound.sampled.*;
 import java.io.*;
 
+/**
+ * PanelMoneda500 es una clase que extiende JPanel y representa un panel gráfico
+ * que muestra una moneda de 500 en la interfaz gráfica.
+ * Permite seleccionar la moneda haciendo clic sobre ella.
+ */
 public class PanelMoneda500 extends JPanel implements PanelSeleccionable {
     private final Image imagenMoneda500;
     private final int imageWidth;

@@ -13,7 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class PanelComprador extends JPanel{
+/**
+ * PanelComprador es una clase que representa el área de la interfaz gráfica
+ * donde se muestran las opciones para ingresar monedas y realizar compras.
+ */
+public class PanelComprador extends JPanel {
     private static Comprador comprador;
     private static Moneda moneda = null;
     private PanelMoneda100 panelMoneda100;
@@ -21,18 +25,22 @@ public class PanelComprador extends JPanel{
     private PanelMoneda1000 panelMoneda1000;
     private PanelMoneda1500 panelMoneda1500;
     private Color color;
-    //Constructor
-    public PanelComprador(){
+
+    /**
+     * Constructor de la clase PanelComprador.
+     * Inicializa el panel y agrega los paneles de monedas disponibles.
+     */
+    public PanelComprador() {
         super();
         color = new Color(100, 149, 237);
         this.setBackground(color);
-        this.setPreferredSize(new Dimension(500,100));
-        this.setLayout(new GridLayout(1,4));
+        this.setPreferredSize(new Dimension(500, 100));
+        this.setLayout(new GridLayout(1, 4));
         color = new Color(173, 216, 230);
         Border border = BorderFactory.createLineBorder(color, 5);
         this.setBorder(border);
 
-        //PanelesMonedas
+        // Agregar paneles de monedas
         panelMoneda100 = new PanelMoneda100();
         this.add(panelMoneda100);
 
@@ -46,16 +54,35 @@ public class PanelComprador extends JPanel{
         this.add(panelMoneda1500);
     }
 
-    public static Comprador getComprador(){
+    /**
+     * Obtiene el comprador actual.
+     * @return El objeto Comprador que representa al comprador.
+     */
+    public static Comprador getComprador() {
         return comprador;
     }
-    public static void setComprador(Comprador comp){
+
+    /**
+     * Establece el comprador actual.
+     * @param comp El objeto Comprador que se va a establecer como comprador actual.
+     */
+    public static void setComprador(Comprador comp) {
         comprador = comp;
     }
-    public static Moneda getMoneda(){
+
+    /**
+     * Obtiene la moneda actualmente ingresada.
+     * @return El objeto Moneda que representa la moneda ingresada.
+     */
+    public static Moneda getMoneda() {
         return moneda;
     }
-    public static void setMoneda(Moneda mon){
+
+    /**
+     * Establece la moneda actualmente ingresada.
+     * @param mon El objeto Moneda que se va a establecer como moneda actualmente ingresada.
+     */
+    public static void setMoneda(Moneda mon) {
         moneda = mon;
     }
 }

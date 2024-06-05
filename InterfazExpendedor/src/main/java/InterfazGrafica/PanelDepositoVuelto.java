@@ -9,6 +9,10 @@ import java.awt.event.MouseEvent;
 import javax.sound.sampled.*;
 import java.io.*;
 
+/**
+ * PanelDepositoVuelto es una clase que representa el área de la interfaz gráfica
+ * donde se muestran las monedas devueltas por el expendedor.
+ */
 public class PanelDepositoVuelto extends JPanel {
     private Expendedor expendedor;
     private final Image monedita100 = new ImageIcon(getClass().getClassLoader().getResource("Monedita100.png")).getImage();
@@ -17,14 +21,19 @@ public class PanelDepositoVuelto extends JPanel {
     private final Image monedita1500 = new ImageIcon(getClass().getClassLoader().getResource("Monedita1500.png")).getImage();
     private Clip clip;
 
-    // Constructor
+    /**
+     * Constructor de la clase PanelDepositoVuelto.
+     * Inicializa el panel y establece el expendedor asociado.
+     * Configura el área de escucha de clics del ratón para procesar la devolución de monedas.
+     * @param expendedor El objeto Expendedor asociado al panel.
+     */
     public PanelDepositoVuelto(Expendedor expendedor) {
         super();
         this.expendedor = expendedor;
         this.setOpaque(false);
         this.setBounds(319, 418, 26, 104);
 
-        // Cargar el archivo de sonido
+        // Cargar el archivo de sonido para la devolución
         try {
             File soundFile = new File("vuelto.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
@@ -42,7 +51,7 @@ public class PanelDepositoVuelto extends JPanel {
                     repaint();
                     PanelPrincipal.getPanelSuperior().repaint();
 
-                    // Reproducir el sonido
+                    // Reproducir el sonido de devolución
                     if (clip != null) {
                         clip.stop(); // Detiene el sonido si ya está reproduciéndose
                         clip.setFramePosition(0); // Vuelve al principio del sonido
@@ -56,14 +65,14 @@ public class PanelDepositoVuelto extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // Verificar si hay monedas en el depósito de vuelto y configurar el cursor en consecuencia
         if (expendedor.getDepositoVuelto().getNumeroProductos() > 0) {
-            // Configurar el cursor si hay productos en el depósito de vuelto
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Cursor de mano si hay monedas
         } else {
-            // Configurar el cursor si no hay productos en el depósito de vuelto
-            this.setCursor(Cursor.getDefaultCursor());
+            this.setCursor(Cursor.getDefaultCursor()); // Cursor predeterminado si no hay monedas
         }
 
+        // Dibujar las monedas devueltas en el depósito de vuelto
         for (int i = 0; i < expendedor.getDepositoVuelto().getNumeroProductos(); i++) {
             if (expendedor.getDepositoVuelto().seeObjeto(i).getClass() == Moneda100.class) {
                 g.drawImage(monedita100, 3, 87 - i * 4, null);

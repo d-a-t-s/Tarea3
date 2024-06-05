@@ -11,11 +11,18 @@ import java.awt.event.MouseEvent;
 import javax.sound.sampled.*;
 import java.io.*;
 
+/**
+ * PanelBuy es una clase que representa un botón de compra en la interfaz gráfica.
+ * Permite al usuario realizar una compra de productos seleccionados al presionarlo.
+ */
 public class PanelBuy extends JPanel {
     private boolean isPressed = false; // Variable para controlar el estado del botón
     private Clip clip;
 
-    // Constructor
+    /**
+     * Constructor de la clase PanelBuy.
+     * Inicializa el botón de compra y configura sus propiedades.
+     */
     public PanelBuy() {
         super();
         this.setOpaque(false);
@@ -44,8 +51,8 @@ public class PanelBuy extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 try {
+                    // Realizar la compra y manejar posibles excepciones
                     PanelComprador.setComprador(new Comprador(PanelComprador.getMoneda(), PanelExpendedor.getProducto(), PanelExpendedor.getExpendedor()));
-                    //ACA SE PUEDE HACER NULL LA MONEDA DEL COMPRADOR PARA DAR LA IMPRESION DE QUE SU MONEDA SE LA LLAVO EL EXPENDEDOR Y POR TANTO SE QUEDA SIN MONEDA
                     PanelComprador.setMoneda(null);
                     PanelPrincipal.getPanelExpendedor().repaint();
                     GestorSeleccion.deseleccionarTodos();

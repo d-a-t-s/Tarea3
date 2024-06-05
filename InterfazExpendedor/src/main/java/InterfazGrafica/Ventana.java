@@ -1,30 +1,26 @@
 package InterfazGrafica;
 
-import Logica.*;
-
 import javax.swing.*;
-import java.awt.*;
 
+/**
+ * La clase Ventana representa la ventana principal de la aplicación.
+ * Contiene el panel principal que organiza y muestra los componentes de la interfaz gráfica.
+ */
 public class Ventana extends JFrame{
     private PanelPrincipal panelPrincipal;
-    //private PanelMoneda panelMonedas;
-    //Constructor
+
+    /**
+     * Constructor de la clase Ventana.
+     * Inicializa la ventana y agrega el panel principal.
+     */
     public Ventana(){
         super();
         this.setTitle("Expendedor");
-        //Tests
         panelPrincipal = new PanelPrincipal();
         this.add(panelPrincipal);
-
-        /* Instanciar y agregar el panel de monedas
-        panelMonedas = new PanelMoneda();
-        this.add(panelMonedas, BorderLayout.SOUTH);*/
-
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.pack();
     }
 }
-

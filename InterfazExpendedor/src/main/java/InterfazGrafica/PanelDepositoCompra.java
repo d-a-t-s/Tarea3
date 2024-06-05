@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * PanelDepositoCompra es una clase que representa el área de la interfaz gráfica
+ * donde se muestra el producto seleccionado para la compra.
+ */
 public class PanelDepositoCompra extends JPanel {
     private final Image imagenCoca = new ImageIcon(getClass().getClassLoader().getResource("Cocacola.png")).getImage();
     private final Image imagenSprite = new ImageIcon(getClass().getClassLoader().getResource("Sprite.png")).getImage();
@@ -17,7 +21,11 @@ public class PanelDepositoCompra extends JPanel {
     private Expendedor expendedor;
     private boolean isButtonEnabled;
 
-    // Constructor
+    /**
+     * Constructor de la clase PanelDepositoCompra.
+     * Inicializa el panel y establece el expendedor asociado.
+     * @param expendedor El objeto Expendedor asociado al panel.
+     */
     public PanelDepositoCompra(Expendedor expendedor) {
         super();
         this.expendedor = expendedor;
@@ -49,6 +57,7 @@ public class PanelDepositoCompra extends JPanel {
             isButtonEnabled = true; // Habilitar botón si hay producto
             this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
+            // Dibujar imagen del producto
             if (expendedor.getProducto().getClass() == CocaCola.class) {
                 g.drawImage(imagenCoca, 18, 15, null);
                 producto = 1;
