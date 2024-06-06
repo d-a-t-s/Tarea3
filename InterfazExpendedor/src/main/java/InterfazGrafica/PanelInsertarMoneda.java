@@ -13,10 +13,7 @@ import java.awt.*;
  * donde se muestran las imágenes de las monedas disponibles para ser insertadas.
  */
 public class PanelInsertarMoneda extends JPanel{
-    private final Image moneda100chiquita = new ImageIcon(getClass().getClassLoader().getResource("moneda100chiquita.png")).getImage();
-    private final Image moneda500chiquita = new ImageIcon(getClass().getClassLoader().getResource("moneda500chiquita.png")).getImage();
-    private final Image moneda1000chiquita = new ImageIcon(getClass().getClassLoader().getResource("moneda1000chiquita.png")).getImage();
-    private final Image moneda1500chiquita = new ImageIcon(getClass().getClassLoader().getResource("moneda1500chiquita.png")).getImage();
+
 
     /**
      * Constructor de la clase PanelInsertarMoneda.
