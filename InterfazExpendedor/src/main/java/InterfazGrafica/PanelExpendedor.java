@@ -22,7 +22,6 @@ public class PanelExpendedor extends JPanel{
     private PanelSeleccionFanta panelSeleccionFanta;
     private PanelSeleccionSuper8 panelSeleccionSuper8;
     private PanelSeleccionSnicker panelSeleccionSnicker;
-    private PanelInsertarMoneda panelInsertarMoneda;
     private PanelBuy panelBuy;
     private PanelDepositoVuelto panelDepositoVuelto;
     private PanelDepositoMonedas panelDepositoMonedas;
@@ -45,10 +44,6 @@ public class PanelExpendedor extends JPanel{
         Dimension size = new Dimension(imagenExpendedor.getWidth(null), imagenExpendedor.getHeight(null));
         this.setPreferredSize(size);
         this.setLayout(null);
-
-        // Añadir panel para insertar moneda
-        panelInsertarMoneda = new PanelInsertarMoneda();
-        this.add(panelInsertarMoneda);
 
         // Añadir panel para el depósito del producto comprado
         panelDepositoCompra = new PanelDepositoCompra(expendedor);
