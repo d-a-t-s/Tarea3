@@ -111,13 +111,6 @@ package Logica{
 
 package InterfazGrafica{
 
-    class ExpendedorFrame {
-        - panelExpendedor: PanelExpendedor
-        + ExpendedorFrame()
-        + initUI(): void
-        + main(args: String[]): void
-    }
-
     class InterfazGUI {
         + main(args: String[]): void
     }
@@ -405,84 +398,110 @@ package InterfazGrafica{
         {method} +isSelected(): boolean
     }
 
-    ExpendedorFrame -- PanelExpendedor
-    Ventana -- InterfazGUI
-    Ventana -- PanelPrincipal
+    Ventana --o InterfazGUI
+    Ventana o-- PanelPrincipal
 
-    PanelBuy -- PanelComprador
-    PanelBuy -- PanelPrincipal
-    PanelBuy -- PanelExpendedor
+    PanelBuy ..> PanelComprador
+    PanelBuy ..> PanelPrincipal
+    PanelBuy ..> PanelExpendedor
 
-    PanelComprador -- PanelMoneda100
-    PanelComprador -- PanelMoneda500
-    PanelComprador -- PanelMoneda1000
-    PanelComprador -- PanelMoneda1500
+    PanelComprador *-- PanelMoneda100
+    PanelComprador *-- PanelMoneda500
+    PanelComprador *-- PanelMoneda1000
+    PanelComprador *-- PanelMoneda1500
 
-    PanelDepositoCompra -- PanelSuperior
-    PanelDepositoCompra -- PanelProductoComprado
+    PanelDepositoCompra --> PanelSuperior
+    PanelDepositoCompra <-- PanelProductoComprado
 
-    PanelDepositoVuelto -- PanelSuperior
-    PanelDepositoCompra -- PanelPrincipal
+    PanelDepositoVuelto --> PanelSuperior
+    PanelDepositoVuelto --> PanelPrincipal
 
-    PanelExpendedor -- PanelDepositoCoca
-    PanelExpendedor -- PanelDepositoSprite
-    PanelExpendedor -- PanelDepositoFanta
-    PanelExpendedor -- PanelDepositoSuper8
-    PanelExpendedor -- PanelDepositoSnicker
-    PanelExpendedor -- PanelSeleccionCocacola
-    PanelExpendedor -- PanelSeleccionSprite
-    PanelExpendedor -- PanelSeleccionFanta
-    PanelExpendedor -- PanelSeleccionSuper8
-    PanelExpendedor -- PanelSeleccionSnicker
-    PanelExpendedor -- PanelBuy
-    PanelExpendedor -- PanelDepositoVuelto
-    PanelExpendedor -- PanelDepositoMonedas
-    PanelExpendedor -- PanelDepositoCompra
+    PanelExpendedor *-- PanelDepositoCoca
+    PanelExpendedor *-- PanelDepositoSprite
+    PanelExpendedor *-- PanelDepositoFanta
+    PanelExpendedor *-- PanelDepositoSuper8
+    PanelExpendedor *-- PanelDepositoSnicker
+    PanelExpendedor *-- PanelSeleccionCocacola
+    PanelExpendedor *-- PanelSeleccionSprite
+    PanelExpendedor *-- PanelSeleccionFanta
+    PanelExpendedor *-- PanelSeleccionSuper8
+    PanelExpendedor *-- PanelSeleccionSnicker
+    PanelExpendedor *-- PanelBuy
+    PanelExpendedor *-- PanelDepositoVuelto
+    PanelExpendedor *-- PanelDepositoMonedas
+    PanelExpendedor *-- PanelDepositoCompra
 
-    PanelPrincipal -- PanelExpendedor
-    PanelPrincipal -- PanelComprador
-    PanelPrincipal -- PanelSuperior
+    PanelPrincipal *-- PanelExpendedor
+    PanelPrincipal *-- PanelComprador
+    PanelPrincipal *-- PanelSuperior
 
-    PanelSuperior -- PanelProductoComprado
+    PanelSuperior *-- PanelProductoComprado
 
-    GestorSeleccion -- PanelSeleccionable
+    GestorSeleccion o-- PanelSeleccionable
 
-    PanelSeleccionCocacola -- PanelSeleccionable
-    PanelSeleccionCocacola -- GestorSeleccion
-    PanelSeleccionCocacola -- PanelExpendedor
+    PanelSeleccionCocacola ..|> PanelSeleccionable
+    PanelSeleccionCocacola --> GestorSeleccion
 
-    PanelSeleccionFanta -- PanelSeleccionable
-    PanelSeleccionFanta -- GestorSeleccion
-    PanelSeleccionFanta -- PanelExpendedor
+    PanelSeleccionFanta ..|> PanelSeleccionable
+    PanelSeleccionFanta --> GestorSeleccion
 
-    PanelSeleccionSnicker -- PanelSeleccionable
-    PanelSeleccionSnicker -- GestorSeleccion
-    PanelSeleccionSnicker -- PanelExpendedor
+    PanelSeleccionSnicker ..|> PanelSeleccionable
+    PanelSeleccionSnicker --> GestorSeleccion
 
-    PanelSeleccionSprite -- PanelSeleccionable
-    PanelSeleccionSprite -- GestorSeleccion
-    PanelSeleccionSprite -- PanelExpendedor
+    PanelSeleccionSprite ..|> PanelSeleccionable
+    PanelSeleccionSprite --> GestorSeleccion
 
-    PanelSeleccionSuper8 -- PanelSeleccionable
-    PanelSeleccionSuper8 -- GestorSeleccion
-    PanelSeleccionSuper8 -- PanelExpendedor
+    PanelSeleccionSuper8 ..|> PanelSeleccionable
+    PanelSeleccionSuper8 --> GestorSeleccion
 
-    GestorSeleccionMonedas -- PanelSeleccionable
+    GestorSeleccionMonedas ..|> PanelSeleccionable
 
-    PanelMoneda100 -- PanelSeleccionable
-    PanelMoneda100 -- PanelComprador
+    PanelMoneda100 ..|> PanelSeleccionable
 
-    PanelMoneda500 -- PanelSeleccionable
-    PanelMoneda500 -- PanelComprador
+    PanelMoneda500 ..|> PanelSeleccionable
 
-    PanelMoneda1000 -- PanelSeleccionable
-    PanelMoneda1000 -- PanelComprador
+    PanelMoneda1000 ..|> PanelSeleccionable
 
-    PanelMoneda1500 -- PanelSeleccionable
-    PanelMoneda1500 -- PanelComprador
+    PanelMoneda1500 ..|> PanelSeleccionable
+
 }
 
+PanelBuy ..> Comprador
 
+PanelComprador --> Comprador
+PanelComprador --> Moneda
 
+PanelDepositoCompra --> Expendedor
+PanelDepositoMonedas --> Expendedor
+PanelDepositoVuelto --> Expendedor
+
+PanelExpendedor *-- Expendedor
+PanelExpendedor --> TipoProducto
+
+PanelSeleccionCocacola --> TipoProducto
+PanelSeleccionFanta --> TipoProducto
+PanelSeleccionSnicker --> TipoProducto
+PanelSeleccionSprite --> TipoProducto
+PanelSeleccionSuper8 --> TipoProducto
+
+PanelMoneda100 ..> Moneda100
+PanelMoneda500 ..> Moneda500
+PanelMoneda1000 ..> Moneda1000
+PanelMoneda1500 ..> Moneda1500
+
+PanelDepositoCoca --> Expendedor
+PanelDepositoCoca ..> TipoProducto
+
+PanelDepositoFanta --> Expendedor
+PanelDepositoFanta ..> TipoProducto
+
+PanelDepositoSnicker --> Expendedor
+PanelDepositoSnicker ..> TipoProducto
+
+PanelDepositoSprite --> Expendedor
+PanelDepositoSprite ..> TipoProducto
+
+PanelDepositoSuper8 --> Expendedor
+PanelDepositoSuper8 ..> TipoProducto
 
 @enduml
