@@ -51,6 +51,11 @@ public class PanelBuy extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 try {
+                    // Verificar si se ha seleccionado un producto
+                    if (PanelExpendedor.getProducto() == null) {
+                        throw new ProductoNoSeleccionadoException("No se ha seleccionado ningún producto.");
+                    }
+
                     // Realizar la compra y manejar posibles excepciones
                     PanelComprador.setComprador(new Comprador(PanelComprador.getMoneda(), PanelExpendedor.getProducto(), PanelExpendedor.getExpendedor()));
                     PanelComprador.setMoneda(null);
@@ -65,6 +70,8 @@ public class PanelBuy extends JPanel {
                         clip.start(); // Reproduce el sonido
                     }
 
+                } catch (ProductoNoSeleccionadoException ProductoNoSeleccionadoException) {
+                    JOptionPane.showMessageDialog(null, ProductoNoSeleccionadoException.getMessage(), "Error de selección de producto", JOptionPane.ERROR_MESSAGE);
                 } catch (Logica.PagoIncorrectoException PagoIncorrectoException) {
                     JOptionPane.showMessageDialog(null, "Para comprar debe introducir una moneda primero", "Error de pago", JOptionPane.ERROR_MESSAGE);
                 } catch (Logica.PagoInsuficienteException PagoInsuficienteException) {
@@ -73,6 +80,8 @@ public class PanelBuy extends JPanel {
                     JOptionPane.showMessageDialog(null, "El depósito está vacío o no se ha ingresado un tipo de producto", "Error de producto", JOptionPane.ERROR_MESSAGE);
                 } finally {
                     PanelComprador.setMoneda(null);
+                    GestorSeleccionMonedas.deseleccionarTodos();
+                    GestorSeleccion.deseleccionarTodos();
                     PanelPrincipal.getPanelExpendedor().repaint();
                 }
                 // Restablecer el estado del botón y repintar
